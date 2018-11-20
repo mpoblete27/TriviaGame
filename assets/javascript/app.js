@@ -3,103 +3,103 @@
 var questionArray = [
         {//1
         question: "Who is not a Marvel character?",
-        answers: {
-          a: "Spider-Man",
-          b: "The Mandarin",
-          c: "Silver Surfer",
-          d: "Wolverine"
-          },
-          correctAnswer: "c"
+        answers: [
+        "Spider-Man",
+        "The Mandarin",
+        "Silver Surfer",
+        "Wolverine"
+        ],
+          correctAnswer: "Silver Surfer"
         },
         {//2
         question: "Who is known as the 'Devourer of Worlds'?", 
-        answers: {
-            a: "Galaxus",
-            b: "Galactus",
-            c: "Galaxy Quest",
-            d: "Galaxnus"
-            },
-        correctAnswer: "b"
+        answers: [
+        "Galaxus",
+        "Galactus",
+        "Galaxy Quest",
+        "Galaxnus"
+        ],
+        correctAnswer: "Galactus"
         },
         {//3
         question: "What is Captain America's real name?",
-        answers: {
-            a: "Steve Rogers",
-            b: "Clinton Barton",
-            c: "Charles Xavier",
-            d: "Matthew Murdock"
-            },
-        correctAnswer: "a"
+        answers: [
+        "Steve Rogers",
+        "Clinton Barton",
+        "Charles Xavier",
+        "Matthew Murdock"
+        ],
+        correctAnswer: "Steve Rogers"
         },
         {//4
         question: "Who is known as 'The Sorcerer Supreme'?", 
-        answers: {
-            a: "Loki",
-            b: "Scarlet Witch",
-            c: "Dr. Fate",
-            d: "Dr. Strange"
-            },
-        correctAnswer: "d"
+        answers: [
+        "Loki",
+        "Scarlet Witch",
+        "Dr. Fate",
+        "Dr. Strange"
+        ],
+        correctAnswer: "Dr. Strange"
         },
         {//5
         question: "What type of radiation caused Bruce BAnner to turn into The Hulk?", 
-        answers: {
-            a: "Alpha Radiation",
-            b: "Beta Radiation",
-            c: "Gamma Radiation",
-            d: "Cosmic Radiation"
-            },
-        correctAnswer: "d"
+        answers: [
+          "Alpha Radiation",
+          "Beta Radiation",
+          "Gamma Radiation",
+          "Cosmic Radiation"
+        ],
+        correctAnswer: "Gamma Radiation"
         },
         {//6
         question: "Which of these has not been an iteration of Spider-Man?", 
-        answers: {
-            a: "Miles Morales",
-            b: "Miguel Ohara",
-            c: "Mac Gargan",
-            d: "Otto Octavius"
-            },
-        correctAnswer: "c"
+        answers: [
+          "Miles Morales",
+          "Miguel Ohara",
+          "Mac Gargan",
+          "Otto Octavius"
+        ],
+        correctAnswer: "Mac Gargan"
         },
         {//7
-        question: "Who did Bradley Cooper play in the MCU version of Gaurdians of the Galaxy?", 
-        answers: {
-            a: "Rocket Racoon",
-              b: "Ronan the Accuser",
-              c: "Drax the Destoyer",
-              d: "Peter Quill"
-            },
-            correctAnswer: "a"
+        question: "Who did Bradley Cooper play in the MCU version of Guardians of the Galaxy?", 
+        answers: [
+          "Rocket Racoon",
+          "Ronan the Accuser",
+          "Drax the Destoyer",
+          "Peter Quill"
+        ],
+            correctAnswer: "Rocket Racoon"
         },
         {//8
         question: "What is the name of the company Iron Man owns?", 
-        answers: {
-            a: "Stark Corporation",
-            b: "Stark Industries",
-            c: "Star Laboratories",
-            d: "Stark Enterprise"
-            },
-        correctAnswer: "b"
+        answers: [
+        "Stark Corporation",
+        "Stark Industries",
+        "Star Laboratories",
+        "Stark Enterprise"
+        ],
+        correctAnswer: "Stark Industries"
         },
         {//9
         question: "What is Thor the god of?", 
-        answers: {
-            a: "Hammers",
-            b: "Storms",
-            c: "Lightning",
-            d: "Thunder"
-            },
-        correctAnswer: "d"
+        answers: [
+          "Hammers",
+          "Storms",
+          "Lightning",
+          "Thunder"
+        ],
+        correctAnswer: "Thunder"
         },
         {//10
         question: "True of False? In the MCU, Thanos did nothing wrong", 
-        answers: {
-            a: "True",
-            b: "False",
-            c: "Why is there an internet meme in my quiz?",
-            d: "Seriously, the right answer is based on the internet meme"
-            },
-        correctAnswer: "a"
+        answers: [
+        "True",
+        "False",
+        "Why is there an internet meme in this quiz?",
+        "Seriously, the right answer is based on the internet meme"
+        ],
+        correctAnswer: "True"
         }
     ]
 
@@ -116,8 +116,8 @@ function run() {
     
     $("#time-left").html("<h2>" + timer + "</h2>");
     if (timer === 0) {
-      stop();
       alert("Time Up!");
+      stop();
     }
   }
   //stop function once timer runs out
@@ -131,47 +131,65 @@ run();
 // make the questions to be answered?, have the answers underneath
 // have each question show up in the '#quiz' div
 function buildQuiz(){
-    var userAnswers = [];
 	// for each question... make a new div
-  for(var i = 0; i < questionArray; i++){
+  for(var i = 0; i < questionArray.length; i++){
     var questionContainer = $("<div>");
-    $("div").addClass("questionLine"); //add question class for the div
+    $(questionContainer).addClass("questionLine"); //add question class for the div
 
     // add the question to this questionLine div
-    $(".questionline").html(questionArray[i].question);
-
+    $(questionContainer).html(questionArray[i].question);
+    $('#quiz').append(questionContainer);
     //make the answerline
     var answerContainer = $("<div>");
-    $("div").addClass("answerLine"); //add answer class for the div
+    $(answerContainer).addClass("answerLine"); //add answer class for the div
 
     // add the answers to answerLine div
-    $(".answerLine").html(questionArray[i].answers);
+    $(answerContainer).html('<p>' + questionArray[i].answers[0] + '</p>' + '<p>' + questionArray[i].answers[1] + '</p>' + '<p>' + questionArray[i].answers[2] + '</p>' + '<p>' + questionArray[i].answers[3] + '</p>');
+    $('#quiz').append(answerContainer);
+    $("<p>").addClass("chosenAnswer");
+    //Give each correct answer in each answer array a "correct" answer class
+    // $(questionArray[0].answers[2]).addClass("rightAnswer");
+    // $(questionArray[1].answers[1]).addClass("rightAnswer");
+    // $(questionArray[2].answers[0]).addClass("rightAnswer");
+    // $(questionArray[3].answers[3]).addClass("rightAnswer");
+    // $(questionArray[4].answers[2]).addClass("rightAnswer");
+    // $(questionArray[5].answers[2]).addClass("rightAnswer");
+    // $(questionArray[6].answers[0]).addClass("rightAnswer");
+    // $(questionArray[7].answers[1]).addClass("rightAnswer");
+    // $(questionArray[8].answers[3]).addClass("rightAnswer");
+    // $(questionArray[9].answers[0]).addClass("rightAnswer");
   }
      
 };
 buildQuiz();
-// make the submit button?
+// make the submit option?
 var correct = 0
 var incorrect = 0
+var userAnswers = [];
+$(document).ready(function(){
+  $(".chosenAnswer").on("click", function(){
+    if(chosenAnswer=== questionArray[i].correctAnswer){
+      $(this).css("color", "green");
+      $(this).push(userAnswers);
+      correct++;
+    }else{
+      $(this).css("color", "red");
+      $(this).push(userAnswers);
+      incorrect++;
 
-function chosenAnswer(){
-  var input;
-  
-  //onclick event here onto chosen answer
-  if(input === correctAnswer){
-    correct++;
-  } else{
-    incorrect++
-  };
-
-}
+    };
+  });
+});
 
 
 // how to view the results?
 function showResults(){
   $(".questionLine").html("");
-  $("answerLine").html("");
+  $(".answerLine").html("");
   alert("All Done! You got " + correct + " questions right and " + incorrect + " questions wrong.");
+  var resultsContainer = $("<div>");
+  $(resultsContainer).html("Correct Answers: " + correct + " Incorrect Answers: " + incorrect);
+  $('#results').append(resultsContainer);
   return;
 }
 // 

@@ -1,7 +1,30 @@
-body#background {
-    background-image:  no-repeat 50% 50% fixed;
+body {
+    background-image: url('../images/Marvelwallpaper3.jpg') !important;
+    background-attachment: fixed;
     background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -webkit-background-size: cover;
     }
+#time-left, #quiz, #results{
+    color: aliceblue;
+}
+#time-left {
+    text-align: center
+}
+
+.intro {
+    color: red;
+    text-align: center;
+}
+
+.questionLine {
+    font-weight: bold;
+    font-size: 150%;
+    text-decoration: underline;
+}
+
+.answerLine {
+    font-size: 100%;
+}
+
+h1 {
+    color: red;
+}
